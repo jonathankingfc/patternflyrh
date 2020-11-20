@@ -83,6 +83,7 @@
     "express": "^4.17.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-hook-form": "^6.11.3",
     "react-router-last-location": "^2.0.1"
   }
 }

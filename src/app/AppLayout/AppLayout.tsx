@@ -8,16 +8,16 @@ import {
   Page,
   PageHeader,
   PageSidebar,
-  SkipToContent
+  SkipToContent,
 } from '@patternfly/react-core';
 import { routes, IAppRoute, IAppRouteGroup } from '@app/routes';
-import logo from '@app/bgimages/Patternfly-Logo.svg';
+import logo from '@app/bgimages/untitled(3).svg';
 
 interface IAppLayout {
   children: React.ReactNode;
 }
 
-const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
+const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
   const [isNavOpenMobile, setIsNavOpenMobile] = React.useState(false);
@@ -26,7 +26,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   };
   const onNavToggle = () => {
     setIsNavOpen(!isNavOpen);
-  }
+  };
   const onPageResize = (props: { mobileView: boolean; windowSize: number }) => {
     setIsMobileView(props.mobileView);
   };
@@ -36,9 +36,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
     function handleClick() {
       history.push('/');
     }
-    return (
-      <img src={logo} onClick={handleClick} alt="PatternFly Logo" />
-    );
+    return <img src={logo} onClick={handleClick} alt="PatternFly Logo" />;
   }
 
   const Header = (
@@ -80,27 +78,19 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
       </NavList>
     </Nav>
   );
-  const Sidebar = (
-    <PageSidebar
-      theme="dark"
-      nav={Navigation}
-      isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />
-  );
-  const PageSkipToContent = (
-    <SkipToContent href="#primary-app-container">
-      Skip to Content
-    </SkipToContent>
-  );
+  const Sidebar = <PageSidebar theme="dark" nav={Navigation} isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />;
+  const PageSkipToContent = <SkipToContent href="#primary-app-container">Skip to Content</SkipToContent>;
   return (
     <Page
       mainContainerId="primary-app-container"
       header={Header}
       sidebar={Sidebar}
       onPageResize={onPageResize}
-      skipToContent={PageSkipToContent}>
+      skipToContent={PageSkipToContent}
+    >
       {children}
     </Page>
   );
-}
+};
 
 export { AppLayout };
