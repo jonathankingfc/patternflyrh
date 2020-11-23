@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import { SessionContext } from '@app/Contexts/SessionContext';
+import LoginPage from '@app/Pages/LoginPage';
 import {
   Nav,
   NavList,
@@ -11,7 +13,7 @@ import {
   SkipToContent,
 } from '@patternfly/react-core';
 import { routes, IAppRoute, IAppRouteGroup } from '@app/routes';
-import logo from '@app/bgimages/untitled(3).svg';
+import logo from '@app/bgimages/Quay-Logo.svg';
 
 interface IAppLayout {
   children: React.ReactNode;
@@ -21,6 +23,8 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
   const [isNavOpenMobile, setIsNavOpenMobile] = React.useState(false);
+  const session = React.useContext(SessionContext);
+
   const onNavToggleMobile = () => {
     setIsNavOpenMobile(!isNavOpenMobile);
   };
@@ -80,7 +84,9 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children }) => {
   );
   const Sidebar = <PageSidebar theme="dark" nav={Navigation} isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />;
   const PageSkipToContent = <SkipToContent href="#primary-app-container">Skip to Content</SkipToContent>;
-  return (
+  return !session.loggedIn ? (
+    <LoginPage />
+  ) : (
     <Page
       mainContainerId="primary-app-container"
       header={Header}

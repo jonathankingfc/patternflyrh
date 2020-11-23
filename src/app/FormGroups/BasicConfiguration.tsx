@@ -1,128 +1,109 @@
 import * as React from 'react';
-import { FormGroup, TextInput, Card, CardTitle, CardBody } from '@patternfly/react-core';
-import { Controller, Control } from 'react-hook-form';
-import ExclamationCircleIcon from '@patternfly/react-icons/dist/js/icons/exclamation-circle-icon';
+import { Card, CardTitle, CardBody } from '@patternfly/react-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCogs } from '@fortawesome/free-solid-svg-icons';
+import { SessionContext } from '@app/Contexts/SessionContext';
+import {
+  TextInput,
+  TextArea,
+  FormSelect,
+  FormSelectOption,
+  Checkbox,
+  ActionGroup,
+  Form,
+  FormGroup,
+  Button,
+} from '@patternfly/react-core';
 
-interface BasicConfigurationProps {
-  register: any;
-}
-const BasicConfiguration: React.FunctionComponent<BasicConfigurationProps> = ({ register }) => (
-  <React.Fragment>
-    <Card>
-      <CardTitle>Basic Configuration</CardTitle>
-      <CardBody>
-        <div className="pf-c-form__group">
-          <div className="pf-c-form__group-label">
-            <label className="pf-c-form__label" htmlFor="form-help-text-name">
-              <span className="pf-c-form__label-text">Name</span>
-              <span className="pf-c-form__label-required" aria-hidden="true">
-                &#42;
-              </span>
-            </label>
-          </div>
-          <div className="pf-c-form__group-control">
-            <input
-              className="pf-c-form-control"
-              required
-              type="text"
-              id="form-help-text-name"
-              name="form-help-text-name"
-              aria-describedby="form-help-text-name-helper"
-              ref={register}
-            />
-            <p className="pf-c-form__helper-text" id="form-help-text-name-helper" aria-live="polite">
-              This is helper text
-            </p>
-          </div>
-        </div>
-        {/* <div className="pf-c-form__group">
-          <div className="pf-c-form__group-label">
-            <label className="pf-c-form__label" htmlFor="form-help-text-email">
-              <span className="pf-c-form__label-text">E-mail</span>
-              <span className="pf-c-form__label-required" aria-hidden="true">
-                &#42;
-              </span>
-            </label>
-          </div>
-          <div className="pf-c-form__group-control">
-            <input
-              className="pf-c-form-control pf-m-warning"
-              required
-              type="text"
-              id="form-help-text-email"
-              name="form-help-text-email"
-              aria-describedby="form-help-text-email-helper"
-            />
-            <p className="pf-c-form__helper-text pf-m-warning" id="form-help-text-email-helper" aria-live="polite">
-              This is helper text for a warning input
-            </p>
-          </div>
-        </div>
-        <div className="pf-c-form__group">
-          <div className="pf-c-form__group-label">
-            <label className="pf-c-form__label" htmlFor="form-help-text-address">
-              <span className="pf-c-form__label-text">Address</span>
-              <span className="pf-c-form__label-required" aria-hidden="true">
-                &#42;
-              </span>
-            </label>
-          </div>
-          <div className="pf-c-form__group-control">
-            <input
-              className="pf-c-form-control"
-              required
-              type="text"
-              id="form-help-text-address"
-              name="form-help-text-address"
-              aria-invalid="true"
-              aria-describedby="form-help-text-address-helper"
-            />
-            <p className="pf-c-form__helper-text pf-m-error" id="form-help-text-address-helper" aria-live="polite">
-              This is helper text for an invalid input
-            </p>
-          </div>
-        </div>
-        <div className="pf-c-form__group">
-          <div className="pf-c-form__group-label">
-            <label className="pf-c-form__label" htmlFor="form-help-text-comment">
-              <span className="pf-c-form__label-text">Comment</span>
-            </label>
-          </div>
-          <div className="pf-c-form__group-control">
-            <input
-              className="pf-c-form-control pf-m-success"
-              value="This is a valid comment"
-              type="text"
-              id="form-help-text-comment"
-              name="form-help-text-comment"
-              aria-describedby="form-help-text-comment-helper"
-            />
-            <p className="pf-c-form__helper-text pf-m-success" id="form-help-text-comment-helper" aria-live="polite">
-              This is helper text for success input
-            </p>
-          </div>
-        </div>
-        <div className="pf-c-form__group">
-          <label className="pf-c-form__label" htmlFor="form-help-textinfo">
-            <span className="pf-c-form__label-text">Information</span>
-          </label>
-          <textarea
-            className="pf-c-form-control"
-            id="form-help-textinfo"
-            name="form-help-textinfo"
-            aria-invalid="true"
-            aria-describedby="form-help-textinfo-helper"
-          ></textarea>
-          <p className="pf-c-form__helper-text pf-m-error" id="form-help-textinfo-helper" aria-live="polite">
-            <span className="pf-c-form__helper-text-icon">
-              <i className="fas fa-exclamation-circle" aria-hidden="true"></i>
-            </span>
-            This is helper text with an icon.
-          </p>
-        </div>*/}
-      </CardBody>
-    </Card>
-  </React.Fragment>
-);
+const BasicConfiguration: React.FunctionComponent = () => {
+  const session = React.useContext(SessionContext);
+
+  const options = [
+    { value: 'please choose', label: 'Please Choose', disabled: false },
+    { value: 'mr', label: 'Mr', disabled: false },
+    { value: 'miss', label: 'Miss', disabled: false },
+    { value: 'mrs', label: 'Mrs', disabled: false },
+    { value: 'ms', label: 'Ms', disabled: false },
+    { value: 'dr', label: 'Dr', disabled: false },
+    { value: 'other', label: 'Other', disabled: false },
+  ];
+  return (
+    <React.Fragment>
+      <Card>
+        <CardTitle>
+          <FontAwesomeIcon icon={faCogs} /> Basic Configuration
+        </CardTitle>
+        <CardBody>
+          return (
+          <Form isHorizontal>
+            <FormGroup
+              label="Name"
+              isRequired
+              fieldId="horizontal-form-name"
+              helperText="Please provide your full name"
+            >
+              <TextInput
+                value={session.configYAML['name']}
+                isRequired
+                type="text"
+                id="horizontal-form-name"
+                aria-describedby="horizontal-form-name-helper"
+                name="horizontal-form-name"
+                onChange={}
+              />
+            </FormGroup>
+            <FormGroup label="Email" isRequired fieldId="horizontal-form-email">
+              <TextInput
+                value={session.configYAML['email']}
+                onChange={this.handleTextInputChange2}
+                isRequired
+                type="email"
+                id="horizontal-form-email"
+                name="horizontal-form-email"
+              />
+            </FormGroup>
+            <FormGroup label="Your title" fieldId="horizontal-form-title">
+              <FormSelect
+                value={session.configYAML['title']}
+                onChange={this.onChange}
+                id="horzontal-form-title"
+                name="horizontal-form-title"
+                aria-label="Your title"
+              >
+                {options.map((option, index) => (
+                  <FormSelectOption
+                    isDisabled={option.disabled}
+                    key={index}
+                    value={option.value}
+                    label={option.label}
+                  />
+                ))}
+              </FormSelect>
+            </FormGroup>
+            <FormGroup label="Your experience" fieldId="horizontal-form-exp">
+              <TextArea
+                value={session.configYAML['experience']}
+                onChange={this.handleTextInputChange3}
+                name="horizontal-form-exp"
+                id="horizontal-form-exp"
+              />
+            </FormGroup>
+            {/* <FormGroup>
+              <Checkbox label="Follow up via email" id="alt-form-checkbox-1" name="alt-form-checkbox-1" />
+            </FormGroup>
+            <FormGroup>
+              <Checkbox label="Remember my password for 30 days" id="alt-form-checkbox-2" name="alt-form-checkbox-2" />
+            </FormGroup> */}
+            <ActionGroup>
+              <Button variant="primary">Submit form</Button>
+              <Button variant="link">Cancel</Button>
+            </ActionGroup>
+          </Form>
+          );
+        </CardBody>
+      </Card>
+    </React.Fragment>
+  );
+};
 
 export default BasicConfiguration;

@@ -3,16 +3,16 @@ import { Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { Alert, PageSection } from '@patternfly/react-core';
 import { DynamicImport } from '@app/DynamicImport';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
-import { Dashboard } from '@app/Dashboard/Dashboard';
-import { GeneralSettings } from '@app/Settings/General/GeneralSettings';
-import { ProfileSettings } from '@app/Settings/Profile/ProfileSettings';
-import { NotFound } from '@app/NotFound/NotFound';
+import { ConfigFormPage } from '@app/Pages/ConfigForm';
+import { GeneralSettings } from '@app/Pages/GeneralSettings';
+import { ProfileSettings } from '@app/Pages/ProfileSettings';
+import { NotFound } from '@app/Pages/NotFound';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 
 let routeFocusTimer: number;
 
-const getSupportModuleAsync = () => () => import(/* webpackChunkName: 'support' */ '@app/Support/Support');
+const getSupportModuleAsync = () => () => import(/* webpackChunkName: 'support' */ '@app/Pages/Support');
 
 const Support = (routeProps: RouteComponentProps): React.ReactElement => {
   const lastNavigation = useLastLocation();
@@ -60,11 +60,11 @@ export type AppRouteConfig = IAppRoute | IAppRouteGroup;
 
 const routes: AppRouteConfig[] = [
   {
-    component: Dashboard,
+    component: ConfigFormPage,
     exact: true,
-    label: 'Dashboard',
+    label: 'Configuration',
     path: '/',
-    title: 'PatternFly Seed | Main Dashboard',
+    title: 'Red Hat Quay Config | Config Form',
   },
   {
     component: Support,

@@ -9,7 +9,6 @@
   "private": true,
   "scripts": {
     "prebuild": "npm run clean",
-    "dr:surge": "node dr-surge.js",
     "build": "webpack --config webpack.prod.js && npm run dr:surge",
     "start": "node server.js",
     "start:dev": "webpack serve --hot --color --progress --config webpack.dev.js",
@@ -21,16 +20,9 @@
     "ci-checks": "npm run type-check && npm run lint && npm run test",
     "build:bundle-profile": "webpack --config webpack.prod.js --profile --json > stats.json",
     "bundle-profile:analyze": "npm run build:bundle-profile && webpack-bundle-analyzer ./stats.json",
-    "clean": "rimraf dist",
-    "storybook": "start-storybook -p 6006",
-    "build:storybook": "build-storybook"
+    "clean": "rimraf dist"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.0.26",
-    "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.0.26",
-    "@storybook/addons": "^6.0.26",
-    "@storybook/react": "^6.0.26",
     "@types/enzyme": "^3.10.7",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^26.0.14",
@@ -50,7 +42,6 @@
     "file-loader": "^6.1.1",
     "html-webpack-plugin": "^4.5.0",
     "imagemin": "^7.0.0",
-    "jest": "^26.5.3",
     "mini-css-extract-plugin": "^1.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "prettier": "^2.1.2",
@@ -77,6 +68,9 @@
     "webpack-merge": "^5.2.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.12",
     "@patternfly/react-core": "^4.63.3",
     "@patternfly/react-icons": "^4.7.11",
     "@patternfly/react-styles": "^4.7.8",
